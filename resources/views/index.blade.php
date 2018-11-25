@@ -42,37 +42,18 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row">
-            <form class="form-inline mb-4">
-                <div class="form-group">
-                    <input type="number" class="form-control" name="m2_price_min" placeholder="Min m2 hind">
-                    &nbsp;
-                </div>
-                <div class="form-group">
-                    <input type="number" class="form-control" name="m2_price_max" placeholder="Max m2 hind">
-                    &nbsp;
-                </div>
-                <button type="submit" class="btn btn-primary">Otsi</button>
-            </form>
-        </div>
-    </div>
+    @include('components/filters')
+
     <section class="container">
-        <div class="row object" v-for="i in listings.data">
-            <div class="col-3 object__image" style="background-image: url(https://picsum.photos/600/400);"></div>
-            <div class="col-6">
-                <h2>Kuuse 66, Mustamäe linnaosa</h2>
-                <div>Pindala: 37 m<sup>2</sup></div>
-                <div>Piltide arv: 13</div>
-            </div>
-            <div class="col-3 text-right">
-                <h2 class="text-info">65000 €</h2>
-                <h4>1756 €/m<sup>2</sup></h4>
-            </div>
-        </div>
+            {{ $listings->links() }}
+        @foreach($listings as $listing)
+            @include('components/listingItem')
+        @endforeach
+            {{ $listings->links() }}
     </section>
 </main>
-@include('footer')
+@include('components/footer')
 <script src="{{asset('/js/app.js')}}"></script>
+
 </body>
 </html>

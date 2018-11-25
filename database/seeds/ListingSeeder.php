@@ -11,6 +11,8 @@ class ListingSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Listing::class, 100)->create();
+        factory(\App\Listing::class, 100)->create()->each(function ($listing) {
+            factory(App\Image::class, rand(1,10))->create(['listing_id' => $listing->id]);
+        });
     }
 }

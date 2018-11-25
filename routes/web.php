@@ -12,3 +12,4 @@
 */
 
 Route::get('/', [\App\Http\Controllers\ListingController::class, 'index']);
+Route::get('/filter', [\App\Http\Controllers\ListingController::class, 'filter']);

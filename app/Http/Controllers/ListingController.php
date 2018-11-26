@@ -14,9 +14,12 @@ class ListingController extends Controller
         $this->listing = $listing;
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        return view('index', ["listings" => Listing::with('image')->paginate(10)]);
+        return view(
+            'index',
+            ["listings" => Listing::with('image')->withCount('image')->paginate(10)]
+        );
 
     }
 

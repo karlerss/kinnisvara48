@@ -14,10 +14,10 @@ class Listing extends Model
         return $this->hasMany('App\Image');
     }
 
-
-    public function  filterByPriceM2($minPrice, $maxPrice)
+    public function filterByPriceM2($minPrice, $maxPrice)
     {
         return Listing::with('image')
+            ->withCount('image')
             ->whereBetween('price_m2', [$minPrice, $maxPrice])
             ->paginate(10);
     }

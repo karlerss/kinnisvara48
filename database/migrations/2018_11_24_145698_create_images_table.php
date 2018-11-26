@@ -14,17 +14,10 @@ class CreateImagesTable extends Migration
     public function up()
     {
         Schema::create('images', function (Blueprint $table) {
-            $table->increments('image_id');
+            $table->increments('id');
             $table->unsignedInteger('listing_id')->index();;
-
             $table->string('path');
-            //TODO: add format, size and other params.
             $table->timestamps();
-
-
-        });
-
-        Schema::table('images', function($table) {
             $table->foreign('listing_id')->references('id')->on('listings');
         });
     }

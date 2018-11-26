@@ -7,9 +7,39 @@ use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
-    public function index()
+    protected $listing;
+
+    public function __construct(Listing $listing)
     {
-        \JavaScript::put('listings', Listing::paginate(10));
-        return view('index');
+        $this->listing = $listing;
+    }
+
+    public function index(Request $request)
+    {
+        return view('index', ["listings" => Listing::with('image')->paginate(10)]);
+
+    }
+
+    public function filter(Request $request)
+    {
+        $minPrice = $request->get('m2_price_min', 0);
+        $maxPrice = $request->get('m2_price_max', 0);
+        if ($request->get('page') !== null) {
+            $minPrice = $request->session()->get('minPrice');
+            $maxPrice = $request->session()->get('maxPrice');
+        } else {
+            $request->session()->put('minPrice', $minPrice);
+            $request->session()->put('maxPrice', $maxPrice);
+        }
+        $filteredListings = $this->listing->filterByPriceM2($minPrice, $maxPrice);
+
+        return view(
+            'index',
+            [
+                "listings" => $filteredListings,
+                "minPrice" => $minPrice,
+                "maxPrice" => $maxPrice,
+            ]
+        );
     }
 }

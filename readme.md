@@ -1,7 +1,14 @@
-Käivitamine eeldab, et arvutis on php.
+### Prerequisites:
 
-1. klooni repo
-1. seadista .env ja sqlite (`touch /path/to/db.sqlite`, DB_CONNECTION=sqlite, DB_DATABASE=/path/to/db.sqlite)
+- php
+- sqlite extension enabled
+- composer
+- yarn
+
+### Set-up
+
+1. Clone this repo
+1. Create .env and sqlite (`touch /path/to/db.sqlite`, DB_CONNECTION=sqlite, DB_DATABASE=/path/to/db.sqlite)
 1. `composer install`
 1. `yarn`
 1. `php artisan migrate`
